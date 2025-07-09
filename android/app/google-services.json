@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "19602068815",
+    "project_id": "loginui-23cb5",
+    "storage_bucket": "loginui-23cb5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19602068815:android:f2d62e0f27b1452f49613a",
+        "android_client_info": {
+          "package_name": "com.example.login3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5QIIvbcYdK5Mp7MD9lUkXs3mZivXop_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
