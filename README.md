@@ -67,9 +67,9 @@ flutter run
 ---
 
 ## Screens Overview
-Login Screen -- User can enter email and password to log in
-Register Screen -- Allows new users to create an account
-Home Screen -- Landing page shown after successful login
+	- Login Screen -- User can enter email and password to log in
+	- Register Screen -- Allows new users to create an account
+	- Home Screen -- Landing page shown after successful login
 
 ---
 
