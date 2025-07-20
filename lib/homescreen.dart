@@ -149,14 +149,14 @@ class HomePage extends StatelessWidget {
   // Builds the "What's on your mind?" category section
   Widget _buildCategoryGrid(BuildContext context) {
     final List<Map<String, String>> categories = [
-      {'name': 'Biryani', 'image': 'https://placehold.co/100x100/FFF0F5/DB2777?text=Biryani'},
-      {'name': 'Pizza', 'image': 'https://placehold.co/100x100/FFF0F5/DB2777?text=Pizza'},
-      {'name': 'Dosa', 'image': 'https://placehold.co/100x100/FFF0F5/DB2777?text=Dosa'},
-      {'name': 'Burger', 'image': 'https://placehold.co/100x100/FFF0F5/DB2777?text=Burger'},
-      {'name': 'Rolls', 'image': 'https://placehold.co/100x100/FFF0F5/DB2777?text=Rolls'},
-      {'name': 'Cake', 'image': 'https://placehold.co/100x100/FFF0F5/DB2777?text=Cake'},
-      {'name': 'Thali', 'image': 'https://placehold.co/100x100/FFF0F5/DB2777?text=Thali'},
-      {'name': 'More', 'image': 'https://placehold.co/100x100/FFF0F5/DB2777?text=More'},
+      {'name': 'Biryani', 'image': 'https://img.freepik.com/free-photo/gourmet-chicken-biryani-with-steamed-basmati-rice-generated-by-ai_188544-13480.jpg'},
+      {'name': 'Pizza', 'image': 'https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg'},
+      {'name': 'Dosa', 'image': 'https://www.shutterstock.com/image-photo/side-view-isometric-angle-crispy-600nw-2600398075.jpg'},
+      {'name': 'Burger', 'image': 'https://img.freepik.com/free-photo/delicious-burger-with-many-ingredients-isolated-white-background-tasty-fast-food-hamburger_90220-1063.jpg'},
+      {'name': 'Rolls', 'image': 'https://www.elmundoeats.com/wp-content/uploads/2024/02/Crispy-spring-rolls.jpg'},
+      {'name': 'Cake', 'image': 'https://img.freepik.com/free-photo/slice-delicious-chocolate-cake_144627-8998.jpg'},
+      {'name': 'Thali', 'image': 'https://media.istockphoto.com/id/1158578874/photo/indian-hindu-veg-thali-food-platter-selective-focus.jpg?s=612x612&w=0&k=20&c=ZHAsJ9sJJoeAmwD3iU1Oo2YSKn_BG6JoE7zuG1frxwg='},
+      {'name': 'More', 'image': 'https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141352.jpg'},
     ];
 
     return Column(
@@ -173,10 +173,11 @@ class HomePage extends StatelessWidget {
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 100.0, // Max width for each item
+            mainAxisSpacing: 16.0,
+            crossAxisSpacing: 16.0,
+            childAspectRatio: 0.8, // Adjust aspect ratio to give more height
           ),
           itemCount: categories.length,
           itemBuilder: (context, index) {
@@ -203,38 +204,79 @@ class HomePage extends StatelessWidget {
 
   // Builds the list of restaurant cards
   Widget _buildRestaurantList() {
+    // In a real app, this data would come from an API
+    final restaurants = [
+      {
+        'name': "Anna's Kitchen",
+        'cuisine': 'South Indian, Biryani',
+        'rating': '4.3',
+        'time': '25-30 MINS',
+        'offer': '30% OFF',
+        'image': 'https://placehold.co/600x400/FEF2F2/DC2626?text=Annas+Kitchen'
+      },
+      {
+        'name': 'Burger Junction',
+        'cuisine': 'Burgers, Fast Food',
+        'rating': '4.5',
+        'time': '20-25 MINS',
+        'offer': '50% OFF UPTO ₹100',
+        'image': 'https://placehold.co/600x400/F3E8FF/8B5CF6?text=Burger+Junction'
+      },
+      {
+        'name': 'The Pizza House',
+        'cuisine': 'Pizza, Italian',
+        'rating': '4.1',
+        'time': '35-40 MINS',
+        'offer': 'Buy 1 Get 1 Free',
+        'image': 'https://placehold.co/600x400/E0F2FE/0EA5E9?text=Pizza+House'
+      },
+      {
+        'name': 'Sweet Tooth Bakery',
+        'cuisine': 'Bakery, Desserts',
+        'rating': '4.7',
+        'time': '15-20 MINS',
+        'offer': '20% OFF on orders above ₹500',
+        'image': 'https://placehold.co/600x400/FDF2F8/F472B6?text=Sweet+Tooth+Bakery'
+      },
+      {
+        'name': 'Healthy Eats',
+        'cuisine': 'Salads, Juices',
+        'rating': '4.6',
+        'time': '30-35 MINS',
+        'offer': '10% OFF on first order',
+        'image': 'https://placehold.co/600x400/F0FDF4/16A34A?text=Healthy+Eats'
+      },
+      {
+        'name': 'Tandoori Nights',
+        'cuisine': 'North Indian, Tandoor',
+        'rating': '4.2',
+        'time': '40-45 MINS',
+        'offer': 'Free Delivery on orders above ₹300',
+        'image': 'https://placehold.co/600x400/FEF3C7/CA8A04?text=Tandoori+Nights'
+      },
+      {
+        'name': 'Sushi World',
+        'cuisine': 'Japanese, Sushi',
+        'rating': '4.8',
+        'time': '30-35 MINS',
+        'offer': '15% OFF on first order',
+        'image': 'https://placehold.co/600x400/DBEAFE/2563EB?text=Sushi+World'
+      },
+      {
+        'name': 'Pasta Palace',
+        'cuisine': 'Italian, Pasta',
+        'rating': '4.4',
+        'time': '25-30 MINS',
+        'offer': '20% OFF on orders above ₹400',
+        'image': 'https://placehold.co/600x400/F8F9FA/0D9488?text=Pasta+Palace'
+      },
+    ];
+
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            // In a real app, this data would come from an API
-            final restaurants = [
-              {
-                'name': "Anna's Kitchen",
-                'cuisine': 'South Indian, Biryani',
-                'rating': '4.3',
-                'time': '25-30 MINS',
-                'offer': '30% OFF',
-                'image': 'https://placehold.co/600x400/FEF2F2/DC2626?text=Annas+Kitchen'
-              },
-              {
-                'name': 'Burger Junction',
-                'cuisine': 'Burgers, Fast Food',
-                'rating': '4.5',
-                'time': '20-25 MINS',
-                'offer': '50% OFF UPTO ₹100',
-                'image': 'https://placehold.co/600x400/F3E8FF/8B5CF6?text=Burger+Junction'
-              },
-              {
-                'name': 'The Pizza House',
-                'cuisine': 'Pizza, Italian',
-                'rating': '4.1',
-                'time': '35-40 MINS',
-                'offer': 'Buy 1 Get 1 Free',
-                'image': 'https://placehold.co/600x400/E0F2FE/0EA5E9?text=Pizza+House'
-              },
-            ];
             return Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: RestaurantCard(
@@ -247,7 +289,7 @@ class HomePage extends StatelessWidget {
               ),
             );
           },
-          childCount: 3, // Number of restaurants
+          childCount: restaurants.length, // Number of restaurants
         ),
       ),
     );
