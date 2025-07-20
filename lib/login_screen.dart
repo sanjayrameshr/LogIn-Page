@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Navigate to the home screen
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => Homescreen()),
+          MaterialPageRoute(builder: (context) => HomePage()),
         );
       }).catchError((onError) {
         print(onError);
@@ -163,10 +163,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: width - 40,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Homescreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
                         if (formKey.currentState?.validate() == true) {
                           formKey.currentState!.save();
                           signIn(); // Call signIn when the form is valid
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
                         }
                       },
                       child: Text(
