@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Only if you're using Firebase
-import 'login_screen.dart'; // Rename file to lowercase: login_screen.dart
+import 'screens/login_screen.dart'; // Rename file to lowercase: login_screen.dart
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

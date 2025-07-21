@@ -1,45 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:login3/homescreen.dart';
-import 'package:login3/constants.dart'; 
-import 'package:login3/colors.dart';
-import 'package:login3/register_screen.dart';
+import 'package:login3/screens/homescreen.dart';
+import 'package:login3/widgets/constants.dart';
+import 'package:login3/widgets/colors.dart';
+import 'package:login3/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late String _email, _password;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late String _email;
+  late String _password;
 
   void signIn() async {
-    if (_email =="sanjayramesh957@gmail.com"  && _password == "sara@123" ){
-      // Simulate a login
-      print("Login successful for test user!");
-      FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: _email, password: _password)
-          .then((authuser) {
-        print("UID: ${authuser.user!.uid}");
-        // Navigate to the home screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+    // 1. Validate the form fields
+    if (formKey.currentState!.validate()) {
+      // 2. Save the field values to the variables
+      formKey.currentState!.save();
+
+      // 3. Show a loading indicator for better UX
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const Center(child: CircularProgressIndicator(color: primaryColor));
+        },
+      );
+
+      try {
+        // 4. Use the variables to sign in with Firebase
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _email,
+          password: _password,
         );
-      }).catchError((onError) {
-        print(onError);
+
+        // 5. If successful, close the loading dialog and navigate
+        if (mounted) {
+          Navigator.pop(context); // Close dialog
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        }
+      } on FirebaseAuthException catch (e) {
+        // Close the loading dialog before showing an error
+        if (mounted) Navigator.pop(context);
+
+        // 6. Show specific error messages to the user
+        String errorMessage = "An error occurred. Please try again.";
+        if (e.code == 'user-not-found' || e.code == 'invalid-credential') {
+          errorMessage = "No user found for that email. Please check your email or create an account.";
+        } else if (e.code == 'wrong-password') {
+          errorMessage = "Wrong password provided for that user.";
+        }
+        
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Login failed. Please check your credentials."),
+          content: Text(errorMessage),
           backgroundColor: Colors.red,
         ));
-      });
-    } else {
-      print("Invalid login details!");
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Invalid login details. Please check your email or password."),
-        backgroundColor: Colors.red,
-      ));
+      }
     }
   }
 
@@ -61,15 +85,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 Stack(
                   children: [
                     Image.asset(
-                      bgImage, // Add your background image
+                      bgImage,
                       height: height * 0.40,
                       width: width,
                       fit: BoxFit.cover,
+                      // Error handling for the image asset
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          height: height * 0.40,
+                          width: width,
+                          color: Colors.grey[200],
+                          child: const Center(child: Text('Image not found')),
+                        );
+                      },
                     ),
                     Container(
                       height: height * 0.40,
                       width: width,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           stops: [0.3, 0.8],
                           begin: Alignment.topCenter,
@@ -80,34 +113,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                Center(
+                const Center(
                   child: Text(
-                    appName, 
+                    appName,
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                   ),
                 ),
-                Center(
-                child: Text(slogan, style: TextStyle( color: Colors.grey))),
+                const Center(
+                    child: Text(slogan, style: TextStyle(color: Colors.grey))),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.blue.withOpacity(0.3),
+                          primaryColor.withOpacity(0.1),
                           Colors.transparent
                         ],
                       ),
-                      border: Border(left: BorderSide(color: primaryColor, width: 5)),
+                      border: const Border(left: BorderSide(color: primaryColor, width: 5)),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Login",
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: TextFormField(
                     onSaved: (value) {
                       _email = value!;
@@ -116,13 +150,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (email == null || email.isEmpty) {
                         return "Please enter your Email!";
                       } else if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(email)) {
-                        return "Check your Email!";
-                      } else {
-                        return null;
+                        return "Please enter a valid email!";
                       }
+                      return null;
                     },
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryColor)),
                       prefixIcon: Icon(Icons.email, color: primaryColor),
                       labelText: "EMAIL ADDRESS",
@@ -131,21 +164,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: TextFormField(
                     onSaved: (value) {
                       _password = value!;
                     },
                     validator: (password) {
                       if (password == null || password.isEmpty) {
-                        return "Enter your password";
-                      } else if (password.length < 8) {
-                        return "Enter correct password!";
+                        return "Please enter your password";
+                      } else if (password.length < 6) {
+                        return "Password must be at least 6 characters";
                       }
                       return null;
                     },
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: primaryColor)),
                       prefixIcon: Icon(Icons.lock_open, color: primaryColor),
                       labelText: "PASSWORD",
@@ -155,41 +188,47 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: TextButton(onPressed: () {}, child: Text("Forgot password?", style: TextStyle(color: primaryColor), )),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: TextButton(onPressed: () {}, child: const Text("Forgot password?", style: TextStyle(color: primaryColor))),
+                  ),
                 ),
+                const SizedBox(height: 10),
                 Center(
                   child: SizedBox(
-                    height: height * 0.08,
+                    height: height * 0.06,
                     width: width - 40,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
-                        if (formKey.currentState?.validate() == true) {
-                          formKey.currentState!.save();
-                          signIn(); // Call signIn when the form is valid
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
-                        }
-                      },
-                      child: Text(
-                        "Login to Account!",
-                        style: TextStyle(color: primaryColor, fontSize: 22, fontWeight: FontWeight.bold),
+                    child: ElevatedButton( 
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        )
                       ),
-                    ),
+                      onPressed: () {
+                        signIn();
+                      },
+                      child: const Text(
+                        "Login to Account",
+                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    )
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account?"),
+                    const Text("Don't have an account?"),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterScreen()), );
+                          context,
+                          MaterialPageRoute(builder: (context) => RegisterScreen()),
+                        );
                       },
-                      child: Text(
+                      child: const Text(
                         "Create account",
-                        style: TextStyle(color: primaryColor),
+                        style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

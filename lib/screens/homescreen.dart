@@ -212,7 +212,7 @@ class HomePage extends StatelessWidget {
         'rating': '4.3',
         'time': '25-30 MINS',
         'offer': '30% OFF',
-        'image': 'https://placehold.co/600x400/FEF2F2/DC2626?text=Annas+Kitchen'
+        'image': 'https://b.zmtcdn.com/data/pictures/chains/1/20930131/0d2b6fceea27ddcb03770e4a027012b9.jpg'
       },
       {
         'name': 'Burger Junction',
@@ -220,7 +220,7 @@ class HomePage extends StatelessWidget {
         'rating': '4.5',
         'time': '20-25 MINS',
         'offer': '50% OFF UPTO ₹100',
-        'image': 'https://placehold.co/600x400/F3E8FF/8B5CF6?text=Burger+Junction'
+        'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT21ACHG22iljXqrmycPCa30zZUxmJikcW_Xt-BCTcw9ExSrLdh7udW_NmpH-xTGe5d9yY&usqp=CAU'
       },
       {
         'name': 'The Pizza House',
@@ -228,48 +228,48 @@ class HomePage extends StatelessWidget {
         'rating': '4.1',
         'time': '35-40 MINS',
         'offer': 'Buy 1 Get 1 Free',
-        'image': 'https://placehold.co/600x400/E0F2FE/0EA5E9?text=Pizza+House'
+        'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2i6QWP5XIngk8aZaI-MDaiqqqb6UNzOSLFg&s'
       },
-      {
-        'name': 'Sweet Tooth Bakery',
-        'cuisine': 'Bakery, Desserts',
-        'rating': '4.7',
-        'time': '15-20 MINS',
-        'offer': '20% OFF on orders above ₹500',
-        'image': 'https://placehold.co/600x400/FDF2F8/F472B6?text=Sweet+Tooth+Bakery'
-      },
-      {
-        'name': 'Healthy Eats',
-        'cuisine': 'Salads, Juices',
-        'rating': '4.6',
-        'time': '30-35 MINS',
-        'offer': '10% OFF on first order',
-        'image': 'https://placehold.co/600x400/F0FDF4/16A34A?text=Healthy+Eats'
-      },
-      {
-        'name': 'Tandoori Nights',
-        'cuisine': 'North Indian, Tandoor',
-        'rating': '4.2',
-        'time': '40-45 MINS',
-        'offer': 'Free Delivery on orders above ₹300',
-        'image': 'https://placehold.co/600x400/FEF3C7/CA8A04?text=Tandoori+Nights'
-      },
-      {
-        'name': 'Sushi World',
-        'cuisine': 'Japanese, Sushi',
-        'rating': '4.8',
-        'time': '30-35 MINS',
-        'offer': '15% OFF on first order',
-        'image': 'https://placehold.co/600x400/DBEAFE/2563EB?text=Sushi+World'
-      },
-      {
-        'name': 'Pasta Palace',
-        'cuisine': 'Italian, Pasta',
-        'rating': '4.4',
-        'time': '25-30 MINS',
-        'offer': '20% OFF on orders above ₹400',
-        'image': 'https://placehold.co/600x400/F8F9FA/0D9488?text=Pasta+Palace'
-      },
+        {
+      "name": "Sweet Tooth Bakery",
+      "cuisine": "Bakery, Desserts",
+      "rating": "4.7",
+      "time": "15-20 MINS",
+      "offer": "20% OFF on orders above ₹500",
+      "image": "https://b.zmtcdn.com/data/dish_photos/39f/af99d0936e292017c3f80f6799a6d39f.jpg"
+    },
+    {
+      "name": "Healthy Eats",
+      "cuisine": "Salads, Juices",
+      "rating": "4.6",
+      "time": "30-35 MINS",
+      "offer": "10% OFF on first order",
+      "image": "https://images.unsplash.com/photo-1584270354949-1b5d82d71a6b"
+    },
+    {
+      "name": "Tandoori Nights",
+      "cuisine": "North Indian, Tandoor",
+      "rating": "4.2",
+      "time": "40-45 MINS",
+      "offer": "Free Delivery on orders above ₹300",
+      "image": "https://b.zmtcdn.com/data/dish_photos/07b/bcd87001bc81f80d3b5a194acb6a607b.jpg"
+    },
+    {
+      "name": "Sushi World",
+      "cuisine": "Japanese, Sushi",
+      "rating": "4.8",
+      "time": "30-35 MINS",
+      "offer": "15% OFF on first order",
+      "image": "https://images.unsplash.com/photo-1553621042-f6e147245754"
+    },
+    {
+      "name": "Pasta Palace",
+      "cuisine": "Italian, Pasta",
+      "rating": "4.4",
+      "time": "25-30 MINS",
+      "offer": "20% OFF on orders above ₹400",
+      "image": "https://images.unsplash.com/photo-1603133872878-684f208fb84e"
+    }
     ];
 
     return SliverPadding(

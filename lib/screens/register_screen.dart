@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:login3/homescreen.dart';
-import 'package:login3/colors.dart';
-import 'package:login3/constants.dart';
+import 'package:login3/screens/homescreen.dart';
+import 'package:login3/widgets/colors.dart';
+import 'package:login3/widgets/constants.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
