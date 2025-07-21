@@ -18,12 +18,9 @@ class _LoginScreenState extends State<LoginScreen> {
   late String _password;
 
   void signIn() async {
-    // 1. Validate the form fields
-    if (formKey.currentState!.validate()) {
-      // 2. Save the field values to the variables
-      formKey.currentState!.save();
 
-      // 3. Show a loading indicator for better UX
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -33,13 +30,11 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       try {
-        // 4. Use the variables to sign in with Firebase
         await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _email,
           password: _password,
         );
 
-        // 5. If successful, close the loading dialog and navigate
         if (mounted) {
           Navigator.pop(context); // Close dialog
           Navigator.pushReplacement(
@@ -48,10 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         }
       } on FirebaseAuthException catch (e) {
-        // Close the loading dialog before showing an error
         if (mounted) Navigator.pop(context);
-
-        // 6. Show specific error messages to the user
         String errorMessage = "An error occurred. Please try again.";
         if (e.code == 'user-not-found' || e.code == 'invalid-credential') {
           errorMessage = "No user found for that email. Please check your email or create an account.";

@@ -32,7 +32,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Builds the top sticky app bar
   SliverAppBar _buildSliverAppBar(BuildContext context) {
     return SliverAppBar(
       backgroundColor: Colors.white,
@@ -58,13 +57,13 @@ class HomePage extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.search, color: Colors.black54, size: 26),
           onPressed: () {
-            // Handle search action
+            // Add me later
           },
         ),
         IconButton(
           icon: const Icon(Icons.account_circle_outlined, color: Colors.black54, size: 28),
           onPressed: () {
-            // Handle profile action
+            // Add me later
           },
         ),
         const SizedBox(width: 8),
@@ -72,7 +71,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Builds the welcome message and search bar section
   Widget _buildWelcomeAndSearch(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,7 +100,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Builds the horizontally scrolling offer cards
   Widget _buildOfferCarousel() {
     return SizedBox(
       height: 150,
@@ -146,7 +143,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Builds the "What's on your mind?" category section
   Widget _buildCategoryGrid(BuildContext context) {
     final List<Map<String, String>> categories = [
       {'name': 'Biryani', 'image': 'https://img.freepik.com/free-photo/gourmet-chicken-biryani-with-steamed-basmati-rice-generated-by-ai_188544-13480.jpg'},
@@ -174,10 +170,10 @@ class HomePage extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 100.0, // Max width for each item
+            maxCrossAxisExtent: 100.0, 
             mainAxisSpacing: 16.0,
             crossAxisSpacing: 16.0,
-            childAspectRatio: 0.8, // Adjust aspect ratio to give more height
+            childAspectRatio: 0.8, 
           ),
           itemCount: categories.length,
           itemBuilder: (context, index) {
@@ -191,7 +187,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Builds the header for the restaurant list
   Widget _buildRestaurantSectionHeader(BuildContext context) {
     return Text(
       'Restaurants to explore',
@@ -202,9 +197,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Builds the list of restaurant cards
   Widget _buildRestaurantList() {
-    // In a real app, this data would come from an API
     final restaurants = [
       {
         'name': "Anna's Kitchen",
@@ -289,14 +282,13 @@ class HomePage extends StatelessWidget {
               ),
             );
           },
-          childCount: restaurants.length, // Number of restaurants
+          childCount: restaurants.length,
         ),
       ),
     );
   }
 }
 
-// Reusable widget for offer cards
 class OfferCard extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -371,7 +363,6 @@ class OfferCard extends StatelessWidget {
   }
 }
 
-// Reusable widget for category items
 class CategoryItem extends StatelessWidget {
   final String name;
   final String imageUrl;
@@ -408,7 +399,6 @@ class CategoryItem extends StatelessWidget {
   }
 }
 
-// Reusable widget for restaurant cards
 class RestaurantCard extends StatelessWidget {
   final String name;
   final String cuisine;
